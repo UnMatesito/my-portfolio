@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.gradient{
+    background: -webkit-radial-gradient(circle, #FF3F00 0%, #E0001E 50%, #6D0C55 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
