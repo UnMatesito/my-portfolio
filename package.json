@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/fiber": "^8.17.10",
+    "@react-three/fiber": "^8.17.12",
+    "@types/three": "^0.172.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-three": "^0.9.7",
-    "tailwindcss": "^3.4.14"
+    "tailwindcss": "^3.4.14",
+    "three": "^0.172.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
