@@ -16,7 +16,7 @@ function HeroSection() {
         </div>
         </div>
       </div>
-      <img src="../me.jpg" alt="myself" className="max-w-lg h-auto object-cover basis-1/2 hidden absolute lg:block md:static z-20"></img>
+      <img src="me.jpg" alt="myself" className="max-w-lg h-auto object-cover basis-1/2 hidden absolute lg:block md:static z-20"></img>
     </div>
   );
 }
