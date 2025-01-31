@@ -1,7 +1,7 @@
 {
-  "name": "my-portofolio",
+  "name": "my-portfolio",
   "private": false,
-  "homepage": "https://unmatesito.github.io/my-portofolio",
+  "homepage": ".",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

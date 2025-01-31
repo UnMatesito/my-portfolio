@@ -8,7 +8,6 @@ import RotatingTorus from "./components/RotatingTorus";
 import ContactCards from "./components/ContactCards";
 import Sections from "./components/Sections";
 
-
 function App() {
     return (
         <div className="text-white">
