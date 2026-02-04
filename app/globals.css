@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/helvetica_neue_lt_std_43_light.woff2') format('woff2'),
+       url('/fonts/helvetica_neue_lt_std_43_light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/helvetica_neue_lt_std_73_bold.woff2') format('woff2'),
+       url('/fonts/helvetica_neue_lt_std_73_bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme {
+  --font-helvetica: 'Helvetica Neue LT Std', sans-serif;
+  --font-times: 'Times New Roman', serif;
+
+  --animate-fade-in: fade-in 0.4s ease-in;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+.bg-projects {
+  background-image: url('/backgrounds/bg-projects.webp');
+}
+
+.bg-contact {
+  background-image: url('/backgrounds/bg-contact.png');
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-amber {
+  0%, 100% {
+    background-color: oklch(79.149% 0.17036 71.012);
+  }
+  50% {
+    background-color: oklch(98.7% 0.022 95.277);
+  }
+}
+
+.btn-pulse-amber:hover {
+  animation: pulse-amber 0.8s ease-in-out infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
