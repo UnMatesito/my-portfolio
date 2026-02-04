@@ -62,3 +62,5 @@ pnpm-lock.yaml
 *.bak
 *.backup
 pnpm-lock.yaml
+.flowbite-react
+.github
