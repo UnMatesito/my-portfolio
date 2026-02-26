@@ -96,7 +96,7 @@ export default function VerticalOptions() {
               className={`
                 text-center transition-all duration-300 drop-shadow-lg
                 ${isActive
-                  ? "scale-110 text-white"
+                  ? "scale-110 text-white hover:cursor-pointer"
                   : "scale-90 text-white/40 blur-[1px]"}
               `}
             >

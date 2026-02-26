@@ -9,7 +9,7 @@ export default function ContactCard({image, title}: {image: string, title: strin
                     src={image}
                     alt={title + "_image"}
                     fill
-                    className="object-cover rounded-md opacity-50"
+                    className="object-cover rounded-md"
                 />
                 <h1 className="font-helvetica font-bold text-white drop-shadow-lg text-4xl flex h-full items-end p-4 tracking-wide">{title}</h1>
             </div>

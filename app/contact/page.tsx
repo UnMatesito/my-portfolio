@@ -34,25 +34,25 @@ export default function Home() {
       </div>
       <div className="min-h-full w-full">
         <div className="absolute left-[14%] top-[15%]">
-          <ContactCard title="Discord" image="/discord.png"/>
+          <ContactCard title="Discord" image="/icons/discord.webp"/>
         </div>
 
         <div className="absolute right-[3%] top-[15%]">
-          <ContactCard title="Reddit" image="/reddit.png"/>
+          <ContactCard title="GitHub" image="/icons/github.webp"/>
         </div>
 
         <div className="absolute left-[5%] top-[45%]">
-          <ContactCard title="Instagram" image="/instagram.png"/>
+          <ContactCard title="Instagram" image="/icons/instagram.webp"/>
         </div>
 
         <div className="absolute right-[14%] top-[45%]">
-        <ContactCard title="LinkedIn" image="/linkedin.png"/>
+        <ContactCard title="LinkedIn" image="/icons/linkedin.webp"/>
         </div>
 
         <div></div>
 
         <div className="absolute right-[20%] top-[75%]">
-          <ContactCard title="Send E-mail" image="/email.png"/>
+          <ContactCard title="Send E-mail" image="/icons/mail.webp"/>
         </div>
       </div>
     </div>

@@ -1,8 +1,17 @@
-export default function GraphNode({ position }: { position: [number, number, number] }) {
+import { useGLTF } from "@react-three/drei";
+
+type GraphNodeProps = {
+  position: [number, number, number];
+  model: string;
+  scale?: [number, number, number];
+};
+
+export default function GraphNode({ position, model, scale }: GraphNodeProps) {
+  const { scene } = useGLTF(model);
+
   return (
-    <mesh position={position}>
-      <sphereGeometry args={[0.3, 32, 32]} />
-      <meshStandardMaterial color="#ff7a00" />
-    </mesh>
+    <group position={position}>
+      <primitive object={scene.clone()} scale={scale} />
+    </group>
   );
 }
