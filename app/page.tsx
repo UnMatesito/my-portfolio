@@ -25,7 +25,7 @@ export default function Home() {
     return (
     <div className="animate-fade-in">
         <video autoPlay loop muted className="fixed top-0 left-0 w-full h-full object-cover -z-10">
-            <source src="/backgrounds/bg-home.mp4" type="video/mp4" />
+            <source src="/backgrounds/bg-home.webm" type="video/mp4" />
         </video>
         <div className="fixed top-0 left-0 w-full h-full bg-black/10"></div>
         <div className="min-h-screen flex flex-col items-center justify-center gap-20">

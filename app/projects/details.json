@@ -1,0 +1,181 @@
+[
+    {
+        "id": "building",
+        "title": "Histori.ar",
+        "description": "This project is a web application that allows users to search, rate and review Argentinian most important historical places and human heritage sites. The web application combines a administration panel with users information, the recent revies for moderation and posibity to create, modify and eliminate historical sites from the site, with a user-side application with a modern UI and tools such as map ratio search for historical sites, Google sign-in features with favorites funtionalies. The application is built using Python with Flask for the administration-side with poetry for dependencies and virtual environment and Vue.js for the user-side, with PostgreSQL as database, MinIO for image storage (hosted in docker containers) and a sophisticated API for all the actions regarding the client application.",
+        "model": "/models/building.glb",
+        "modelScale": [1.2, 1.2, 1.2],
+        "position": [7, 0, -3.8],
+        "rotation": [0, -0.6, 0],
+        "images": [
+            "/projects/historiar_1.png"
+        ],
+        "tech": [
+            {
+                "name" : "Python",
+                "icon" : "devicon-python-plain"
+            },
+            {
+                "name" : "Flask",
+                "icon" : "devicon-flask-original"
+            },
+            {
+                "name" : "Vue.js",
+                "icon" : "devicon-vuejs-plain"
+            },
+            {
+                "name" : "PostgreSQL",
+                "icon" : "devicon-postgresql-plain"
+            },
+            {
+                "name" : "Docker",
+                "icon" : "devicon-docker-plain"
+            }
+        ]
+    },
+    {
+        "id": "excavator",
+        "title": "Alkil.ar",
+        "description": "Alkil.ar is a web application destined to facilitate the rental and management of construction machinery. The objective of the application consists in centralizing the actions made by the rental company and the clients, providing a modern and easy-to-use interface for all users. Administrators can manage the inventory of machinery, manage the reservations, handle all the related to users and view statistics. Clients can search for machinery, make reservations, and write their questions and problems in a dedicated forum. Workers of the rental company can also make reservations for machinery, complete delivery forms of machinery that has to be handed to the client and check and notify through the applicaction the state of the machinery once is returned. The application is built using Laravel and MariaDB for database, the inflastructure of the application was built using Docker making sure that every dependency is propoerly handled and encapsulated, as for the front-end it was developed using Blade Templates and components from flowbite and Tailwind CSS for styling.",
+        "model": "/models/excavator.glb",
+        "modelScale": [0.04, 0.025, 0.03],
+        "position": [5, 0, 5],
+        "rotation": [0.0, 0.4, 0],
+        "images": [
+            "/projects/alkilar_1.png"
+        ],
+        "tech": [
+            {
+                "name" : "PHP",
+                "icon" : "devicon-php-plain"
+            },
+            {
+                "name" : "Laravel",
+                "icon" : "devicon-laravel-plain"
+            },
+            {
+                "name" : "MariaDB",
+                "icon" : "devicon-mysql-plain"
+            },
+            {
+                "name" : "Docker",
+                "icon" : "devicon-docker-plain"
+            },
+            {
+                "name" : "Tailwind CSS",
+                "icon" : "devicon-tailwindcss-plain"
+            }
+        ]
+    },
+    {
+        "id": "carrera",
+        "title": "Carrera de Mente",
+        "description": "",
+        "model": "/models/carrera.glb",
+        "modelScale": [1.2, 1.2, 1.2],
+        "position": [-3.7, 0, 5],
+        "rotation": [0.0, 0.4, 0],
+        "images": [
+            "/projects/carrera_1.png"
+        ],
+        "tech": [
+            {
+                "name": "JavaScript",
+                "icon": "devicon-javascript-plain"
+            },
+            {
+                "name": "Node.js",
+                "icon": "devicon-nodejs-plain"
+            },
+            {
+                "name": "MongoDB",
+                "icon": "devicon-mongodb-plain"
+            },
+            {
+                "name": "HTML",
+                "icon": "devicon-html5-plain"
+            },
+            {
+                "name": "CSS",
+                "icon": "devicon-css3-plain"
+            }
+        ]
+    },
+    {
+        "id": "portfolio",
+        "title": "Portfolio",
+        "description": "My personal portfolio website to showcase my projects and skills.",
+        "model": "/models/portfolio.glb",
+        "modelScale": [1.2, 1.2, 1.2],
+        "position": [-3, 0, -6],
+        "rotation": [0.0, 0.4, 0],
+        "images": [
+            "/projects/portfolio_1.png",
+            "/projects/portfolio_2.png"
+        ],
+        "tech": [
+            {
+                "name": "TypeScript",
+                "icon": "devicon-typescript-plain"
+            },
+            {
+                "name": "React",
+                "icon": "devicon-react-original"
+            },
+            {
+                "name": "Next.js",
+                "icon": "devicon-nextjs-plain"
+            },
+            {
+                "name": "Tailwind CSS",
+                "icon": "devicon-tailwindcss-plain"
+            },
+            {
+                "name": "React Three Fiber",
+                "icon": "devicon-threejs-plain"
+            }
+        ]
+    },
+    {
+        "id" : "audit",
+        "title": "Sistema de Observaciones y Recomandaciones de Auditorías (S.O.R.A.)",
+        "description": "",
+        "model": "/models/audit.glb",
+        "modelScale": [1.2, 1.2, 1.2],
+        "position": [-7, 0.2, 0],
+        "rotation": [0.0, 0.4, 0],
+        "images": [
+            "/projects/audit_1.png"
+        ],
+        "tech": [
+            {
+                "name": "PHP",
+                "icon": "devicon-php-plain"
+            },
+            {
+                "name": "Symfony",
+                "icon": "devicon-symfony-original"
+            },
+            {
+                "name": "MySQL",
+                "icon": "devicon-mysql-plain"
+            },
+            {
+                "name": "Apache",
+                "icon": "devicon-apache-plain"
+            },
+            {
+                "name": "React",
+                "icon": "devicon-react-original"
+            },
+            {
+                "name": "Tailwind CSS",
+                "icon": "devicon-tailwindcss-plain"
+            },
+            {
+                "name": "Docker",
+                "icon": "devicon-docker-plain"
+            }
+        ]
+    }
+]

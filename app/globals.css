@@ -61,7 +61,7 @@
     background-color: oklch(79.149% 0.17036 71.012);
   }
   50% {
-    background-color: oklch(98.7% 0.022 95.277);
+    background-color: oklch(98.688% 0.02129 95.306 / 0.5);
   }
 }
 
