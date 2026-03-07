@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ProyectsGraph from "./ProyectsGraph";
+import ProyectsGraph from "./ProjectsGraph";
 import Loading from "../loading";
 import { useProgress } from "@react-three/drei";
 import { useEffect } from "react";

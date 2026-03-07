@@ -111,7 +111,8 @@
         "rotation": [0.0, 0.4, 0],
         "images": [
             "/projects/portfolio_1.png",
-            "/projects/portfolio_2.png"
+            "/projects/portfolio_2.png",
+            "/projects/portfolio_3.png"
         ],
         "tech": [
             {
@@ -131,27 +132,23 @@
                 "icon": "devicon-tailwindcss-plain"
             },
             {
-                "name": "React Three Fiber",
-                "icon": "devicon-threejs-plain"
+                "name": "Three.js",
+                "icon": "devicon-threejs-original"
             }
         ]
     },
     {
         "id" : "audit",
-        "title": "Sistema de Observaciones y Recomandaciones de Auditorías (S.O.R.A.)",
+        "title": "S.O.R.A",
         "description": "",
         "model": "/models/audit.glb",
-        "modelScale": [1.2, 1.2, 1.2],
+        "modelScale": [1.3, 1.3, 1.3],
         "position": [-7, 0.2, 0],
-        "rotation": [0.0, 0.4, 0],
+        "rotation": [0.2, 0.4, 0],
         "images": [
             "/projects/audit_1.png"
         ],
         "tech": [
-            {
-                "name": "PHP",
-                "icon": "devicon-php-plain"
-            },
             {
                 "name": "Symfony",
                 "icon": "devicon-symfony-original"

@@ -33,7 +33,7 @@ export default function Home() {
                 <Image src="/svg/signature.svg" alt="Mateo Suarez" width={0} height={0} className="mb-4 selection-none w-100 drop-shadow-xl drop-shadow-gray-50" />
                 <div className="">
                     <h1 className="font-bold italic text-6xl uppercase drop-shadow-md drop-shadow-gray-50">Mateo Suarez</h1>
-                    <h2 className="font-bold text-2xl drop-shadow-md drop-shadow-gray-50">The Real Front-End Developer</h2>
+                    <h2 className="font-bold text-2xl drop-shadow-md drop-shadow-gray-50">The Real Web Developer</h2>
                 </div>
             </div>
 
