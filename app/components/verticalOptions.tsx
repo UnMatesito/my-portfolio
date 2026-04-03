@@ -8,7 +8,6 @@ const modes = [
   { id: 1, title: "About Me", link: "/about" },
   { id: 2, title: "My Projects", link: "/projects" },
   { id: 3, title: "Contact", link: "/contact" },
-  { id: 4, title: "Settings", link: "/settings" },
 ];
 
 const ITEM_HEIGHT = 58; // Altura de cada elemento en píxeles

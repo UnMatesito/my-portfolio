@@ -88,3 +88,11 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.patterned-background {
+  background-color: #7e7e7e;
+  opacity: 0.3;
+  background-image:  repeating-linear-gradient(45deg, #5d5d5d 25%, transparent 25%, transparent 75%, #5d5d5d 75%, #5d5d5d), repeating-linear-gradient(45deg, #5d5d5d 25%, #7e7e7e 25%, #7e7e7e 75%, #5d5d5d 75%, #5d5d5d);
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+}
