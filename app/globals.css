@@ -2,23 +2,6 @@
 @import "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
 
-@font-face {
-  font-family: 'Helvetica Neue LT Std';
-  src: url('/fonts/helvetica_neue_lt_std_43_light.woff2') format('woff2'),
-       url('/fonts/helvetica_neue_lt_std_43_light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Helvetica Neue LT Std';
-  src: url('/fonts/helvetica_neue_lt_std_73_bold.woff2') format('woff2'),
-       url('/fonts/helvetica_neue_lt_std_73_bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
 
 :root {
   --background: #ffffff;
@@ -26,7 +9,6 @@
 }
 
 @theme {
-  --font-helvetica: 'Helvetica Neue LT Std', sans-serif;
   --font-times: 'Times New Roman', serif;
 
   --animate-fade-in: fade-in 0.4s ease-in;

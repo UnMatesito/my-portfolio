@@ -1,11 +1,10 @@
 "use client";
 
-import { Carousel } from "flowbite-react";
+import { useState, useEffect } from "react";
 
 export type TechItem = {
   name: string;
   iconClass: string;
-  iconColorClass?: string;
 };
 
 type TechCarrouselProps = {
@@ -17,41 +16,41 @@ type TechCarrouselProps = {
 export default function TechCarrousel({
   title,
   items,
-  intervalMs = 5000,
+  intervalMs = 3000,
 }: TechCarrouselProps) {
+  const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAnimating(true);
+      setTimeout(() => {
+        setCurrent((prev) => (prev + 1) % items.length);
+        setAnimating(false);
+      }, 300);
+    }, intervalMs);
+    return () => clearInterval(timer);
+  }, [items.length, intervalMs]);
+
   if (items.length === 0) return null;
 
   return (
     <div className="w-full max-w-[22rem] min-w-[16rem]">
-      <h3 className="h-16 md:h-20 flex items-center justify-center text-3xl md:text-4xl font-bold">
+      <h3 className="h-14 md:h-20 flex items-center justify-center text-3xl md:text-4xl font-bold">
         {title}
       </h3>
 
-      <div className="mt-4 h-56 md:h-52 overflow-hidden rounded-md">
-        <Carousel
-          className="h-full w-full"
-          slideInterval={intervalMs}
-          indicators={false}
-          pauseOnHover
-          draggable={true}
-          theme={{
-            item: {
-              base: "block w-full h-full",
-            },
-          }}
+      <div className="mt-4 h-48 overflow-hidden relative flex flex-col items-center justify-center gap-3">
+        <div
+          className={`flex flex-col items-center justify-center gap-3 transition-all duration-300 ease-in-out ${
+            animating ? "opacity-0 -translate-y-4" : "opacity-100 translate-y-0"
+          }`}
         >
-          {items.map((item) => (
-            <div
-              key={item.name}
-              className="h-full w-full flex flex-col items-center justify-center gap-2 px-10 text-center"
-            >
-              <i
-                className={`${item.iconClass} ${item.iconColorClass ?? ""} text-7xl leading-none`}
-              />
-              <p className="text-2xl leading-tight">{item.name}</p>
-            </div>
-          ))}
-        </Carousel>
+          <i className={`${items[current].iconClass} text-7xl leading-none`} />
+          <p className="text-2xl font-semibold leading-tight">
+            {items[current].name}
+          </p>
+        </div>
       </div>
     </div>
   );

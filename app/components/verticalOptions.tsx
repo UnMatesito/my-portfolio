@@ -35,7 +35,7 @@ export default function VerticalOptions() {
     <div
       onWheel={handleWheel}
       onClick={handleClick}
-      className="relative h-40 w-full overflow-hidden font-helvetica cursor-pointer select-none"
+      className="relative h-40 w-full overflow-hidden cursor-pointer select-none"
     >
       {/* Flecha arriba */}
       <button
@@ -81,7 +81,7 @@ export default function VerticalOptions() {
 
       {/* Lista */}
       <div
-        className="flex flex-col items-center gap-6 px-12 transition-transform duration-300 ease-out"
+        className="flex flex-col items-center gap-3 px-12 transition-transform duration-300 ease-out"
         style={{
           transform: `translateY(${56 - active * ITEM_HEIGHT}px)`
         }}
@@ -99,7 +99,7 @@ export default function VerticalOptions() {
                   : "scale-90 text-white/40 blur-[1px]"}
               `}
             >
-              <div className="text-3xl font-bold italic leading-tight">
+              <div className="text-4xl font-bold italic leading-tight">
                 {mode.title}
               </div>
             </div>

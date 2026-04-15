@@ -61,10 +61,10 @@ Array.from(new Set(nodes.map((node) => node.model))).forEach((modelPath) => {
 const labelPositionById: Record<string, string> = {
   home: "absolute top-1/2 left-1/2 -translate-x-10 translate-y-8",
   carrera: "absolute bottom-25 left-[25.5%]",
-  portfolio: "absolute top-[21.5%] left-[35.1%]",
+  portfolio: "absolute top-[21.5%] left-[34.5%]",
   audit: "absolute bottom-[42%] left-[16%]",
   excavator: "absolute bottom-[9%] right-[23%]",
-  building: "absolute right-[18%] top-[33%]",
+  building: "absolute right-[17%] top-[33%]",
 };
 
 export default function ProyectsGraph() {
@@ -143,7 +143,7 @@ export default function ProyectsGraph() {
         />
       )}
 
-      <div className="text-zinc-800 text-2xl font-helvetica font-bold">
+      <div className="text-zinc-800 text-3xl font-extrabold">
         {nodes
           .filter((node) => labelPositionById[node.id])
           .map((node) => (

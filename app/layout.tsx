@@ -1,24 +1,15 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { ThemeModeScript } from "flowbite-react";
 import "./globals.css";
 import Providers from "./providers";
+import { Work_Sans } from "next/font/google";
 
-const helvetica = localFont({
-  src: [
-    {
-      path: '../public/fonts/helvetica_neue_lt_std_43_light.woff2',
-      weight: '300',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/helvetica_neue_lt_std_73_bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-helvetica',
-});
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+}); 
 
 export const metadata: Metadata = {
   title: "Mateo Suarez",
@@ -30,9 +21,10 @@ export default function RootLayout({ children }: Readonly<{children: React.React
     <html lang="en" suppressHydrationWarning>
       <head>
         <ThemeModeScript />
-        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/
+        devicon.min.css" />
       </head>
-      <body className={`${helvetica.variable} antialiased`}>
+      <body className={`antialiased ${workSans.className}`}>
         <Providers>
           {children}
         </Providers>

@@ -13,12 +13,20 @@ export default function Home() {
     { name: "JavaScript", iconClass: "devicon-javascript-plain" },
     { name: "TypeScript", iconClass: "devicon-typescript-plain" },
     { name: "Python", iconClass: "devicon-python-plain" },
+    { name: "PHP", iconClass: "devicon-php-plain" },
   ];
 
   const frameworkItems: TechItem[] = [
     { name: "React", iconClass: "devicon-react-original" },
     { name: "Next.js", iconClass: "devicon-nextjs-plain" },
-    { name: "Tailwind CSS", iconClass: "devicon-tailwindcss-plain" },
+    { name: "Laravel", iconClass: "devicon-laravel-plain" },
+    { name: "Flask", iconClass: "devicon-flask-original" },
+  ];
+
+  const dbmsItems: TechItem[] = [
+    { name: "MySQL", iconClass: "devicon-mysql-plain" },
+    { name: "PostgreSQL", iconClass: "devicon-postgresql-plain" },
+    { name: "MongoDB", iconClass: "devicon-mongodb-plain" },
   ];
 
   const devToolItems: TechItem[] = [
@@ -43,9 +51,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center animate-fade-in scroll-smooth">
-        <div className="patterned-background w-screen h-[175%] absolute top-0 left-0 -z-10"></div>
-        <h1 className="text-4xl font-bold mb-4 font-helvetica bg-linear-to-r from-transparent via-black to-transparent shadow-lg text-white w-screen text-center py-1">About Me</h1>
-        <div className="bg-gray-200/40 rounded-sm p-4 max-w-screen text-center font-helvetica text-lg mx-4">
+        <div className="patterned-background w-screen h-[185%] absolute top-0 left-0 -z-10"></div>
+        <h1 className="text-4xl font-bold mb-4 bg-linear-to-r from-transparent via-black to-transparent shadow-lg text-white w-screen text-center py-1">About Me</h1>
+        <div className="bg-gray-200/40 rounded-sm p-4 max-w-screen text-center text-lg mx-4">
             <div className="bg-zinc-400/60 rounded-sm p-4 flex flex-row items-center gap-4 shadow-lg">
                 <Image src="/img/me.jpg" alt="Profile Image" width={600} height={600} className="rounded-sm" unoptimized/>
                 <div>
@@ -61,6 +69,7 @@ export default function Home() {
                 <div className="w-full flex flex-wrap justify-center items-stretch gap-6 mb-8 px-4">
                   <TechCarrousel title="Languages" items={languageItems} />
                   <TechCarrousel title="Frameworks" items={frameworkItems} />
+                  <TechCarrousel title="DBMS" items={dbmsItems} />
                   <TechCarrousel title="Dev Tools" items={devToolItems} />
                 </div>
             </div>

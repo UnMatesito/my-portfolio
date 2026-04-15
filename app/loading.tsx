@@ -24,6 +24,7 @@ export default function Loading() {
               width={0}
               height={0}
               className="w-100 invert mb-48"
+              loading="eager"
             />
           ) : (
             <h1 className="text-white font-bold text-9xl mb-20 select-none pointer-events-none">MS</h1>

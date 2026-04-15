@@ -12,22 +12,27 @@
         ],
         "tech": [
             {
+                "id": "python",
                 "name" : "Python",
                 "icon" : "devicon-python-plain"
             },
             {
+                "id": "flask",
                 "name" : "Flask",
                 "icon" : "devicon-flask-original"
             },
             {
+                "id": "vue",
                 "name" : "Vue.js",
                 "icon" : "devicon-vuejs-plain"
             },
             {
+                "id": "postgresql",
                 "name" : "PostgreSQL",
                 "icon" : "devicon-postgresql-plain"
             },
             {
+                "id": "docker",
                 "name" : "Docker",
                 "icon" : "devicon-docker-plain"
             }
@@ -46,24 +51,39 @@
         ],
         "tech": [
             {
+                "id": "php",
                 "name" : "PHP",
                 "icon" : "devicon-php-plain"
             },
             {
+                "id": "laravel",
                 "name" : "Laravel",
                 "icon" : "devicon-laravel-plain"
             },
             {
+                "id": "mariadb",
                 "name" : "MariaDB",
                 "icon" : "devicon-mysql-plain"
             },
             {
+                "id": "docker",
                 "name" : "Docker",
                 "icon" : "devicon-docker-plain"
             },
             {
+                "id": "tailwindcss",
                 "name" : "Tailwind CSS",
                 "icon" : "devicon-tailwindcss-plain"
+            },
+            {
+                "id": "composer",
+                "name": "Composer",
+                "icon": "devicon-composer-plain"
+            },
+            {
+                "id": "npm",
+                "name": "npm",
+                "icon": "devicon-npm-plain"
             }
         ]
     },
@@ -80,24 +100,39 @@
         ],
         "tech": [
             {
+                "id": "javascript",
                 "name": "JavaScript",
                 "icon": "devicon-javascript-plain"
             },
             {
+                "id": "nodejs",
                 "name": "Node.js",
                 "icon": "devicon-nodejs-plain"
             },
             {
+                "id": "mongodb",
                 "name": "MongoDB",
                 "icon": "devicon-mongodb-plain"
             },
             {
+                "id": "html5",
                 "name": "HTML",
                 "icon": "devicon-html5-plain"
             },
             {
+                "id": "css3",
                 "name": "CSS",
                 "icon": "devicon-css3-plain"
+            },
+            {
+                "id": "express",
+                "name": "Express",
+                "icon": "devicon-express-original"
+            },
+            {
+                "id": "npm",
+                "name": "npm",
+                "icon": "devicon-npm-plain"
             }
         ]
     },
@@ -116,24 +151,34 @@
         ],
         "tech": [
             {
+                "id": "typescript",
                 "name": "TypeScript",
                 "icon": "devicon-typescript-plain"
             },
             {
+                "id": "react",
                 "name": "React",
                 "icon": "devicon-react-original"
             },
             {
+                "id": "nextjs",
                 "name": "Next.js",
                 "icon": "devicon-nextjs-plain"
             },
             {
+                "id": "tailwindcss",
                 "name": "Tailwind CSS",
                 "icon": "devicon-tailwindcss-plain"
             },
             {
+                "id": "threejs",
                 "name": "Three.js",
                 "icon": "devicon-threejs-original"
+            },
+            {
+                "id": "npm",
+                "name": "npm",
+                "icon": "devicon-npm-plain"
             }
         ]
     },
@@ -150,28 +195,44 @@
         ],
         "tech": [
             {
+                "id": "symfony",
                 "name": "Symfony",
                 "icon": "devicon-symfony-original"
             },
             {
+                "id": "mysql",
                 "name": "MySQL",
                 "icon": "devicon-mysql-plain"
             },
             {
+                "id": "apache",
                 "name": "Apache",
                 "icon": "devicon-apache-plain"
             },
             {
+                "id": "react",
                 "name": "React",
                 "icon": "devicon-react-original"
             },
             {
+                "id": "tailwindcss",
                 "name": "Tailwind CSS",
                 "icon": "devicon-tailwindcss-plain"
             },
             {
+                "id": "docker",
                 "name": "Docker",
                 "icon": "devicon-docker-plain"
+            },
+            {
+                "id": "vite",
+                "name": "Vite.js",
+                "icon": "devicon-vitejs-plain"
+            },
+            {
+                "id": "composer",
+                "name": "Composer",
+                "icon": "devicon-composer-plain"
             }
         ]
     }

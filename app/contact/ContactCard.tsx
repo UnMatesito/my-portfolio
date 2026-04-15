@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ContactCard({image, title}: {image: string, title: string}) {
+export default function ContactCard({image, title, link}: {image: string, title: string, link: string}) {
     return (
-        <Link href="https://discord.com">
+        <Link href={link} target="_blank" className="w-full">
             <div className="bg-black/40 h-45 w-150 rounded-md relative hover:scale-105 transition-transform cursor-pointer shadow-xl">
                 <Image 
                     src={image}
@@ -11,7 +11,7 @@ export default function ContactCard({image, title}: {image: string, title: strin
                     fill
                     className="object-cover rounded-md"
                 />
-                <h1 className="font-helvetica font-bold text-white drop-shadow-lg text-4xl flex h-full items-end p-4 tracking-wide">{title}</h1>
+                <h1 className="font-bold text-white drop-shadow-lg text-4xl flex h-full items-end p-4 tracking-wide">{title}</h1>
             </div>
         </Link>
     );
