@@ -8,7 +8,9 @@
         "position": [7, 0, -3.8],
         "rotation": [0, -0.6, 0],
         "images": [
-            "/projects/historiar_1.png"
+            "/projects/building_2.png",
+            "/projects/building_1.png",
+            "/projects/building_3.png"
         ],
         "tech": [
             {
@@ -47,7 +49,9 @@
         "position": [5, 0, 5],
         "rotation": [0.0, 0.4, 0],
         "images": [
-            "/projects/alkilar_1.png"
+            "/projects/alkilar_2.png",
+            "/projects/alkilar_1.png",
+            "/projects/alkilar_3.png"
         ],
         "tech": [
             {
@@ -96,7 +100,9 @@
         "position": [-3.7, 0, 5],
         "rotation": [0.0, 0.4, 0],
         "images": [
-            "/projects/carrera_1.png"
+            "/projects/carrera_2.png",
+            "/projects/carrera_1.png",
+            "/projects/carrera_3.png"
         ],
         "tech": [
             {
@@ -191,7 +197,9 @@
         "position": [-7, 0.2, 0],
         "rotation": [0.2, 0.4, 0],
         "images": [
-            "/projects/audit_1.png"
+            "/projects/sora_1.png",
+            "/projects/sora_2.png",
+            "/projects/sora_3.png"
         ],
         "tech": [
             {
