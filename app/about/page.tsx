@@ -51,22 +51,22 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center animate-fade-in scroll-smooth">
-        <div className="patterned-background w-screen h-[185%] absolute top-0 left-0 -z-10"></div>
+        <div className="patterned-background w-screen h-[385%] sm:h-[255%] lg:h-[200%] 2xl:h-[185%] absolute top-0 left-0 -z-10"></div>
         <h1 className="text-4xl font-bold mb-4 bg-linear-to-r from-transparent via-black to-transparent shadow-lg text-white w-screen text-center py-1">About Me</h1>
         <div className="bg-gray-200/40 rounded-sm p-4 max-w-screen text-center text-lg mx-4">
-            <div className="bg-zinc-400/60 rounded-sm p-4 flex flex-row items-center gap-4 shadow-lg">
+            <div className="bg-zinc-400/60 rounded-sm p-4 flex flex-col lg:flex-row items-center gap-4 shadow-lg">
                 <Image src="/img/me.jpg" alt="Profile Image" width={600} height={600} className="rounded-sm" unoptimized/>
                 <div>
-                  <h1 className="text-6xl font-bold mb-6">Hello! My name is Mateo Suarez</h1>
-                  <p className="text-3xl text-left px-8">I&apos;m a passionate software developer with a love to create innovative and beautiful solutions. My goal is always learn new things along the way and enjoy the process, always looking for opportunities to grow as a developer. Front-end development is my passion, and I strive to create user-friendly and visually appealing interfaces with modern technologies, great interactivity and applying the best practices for clean and maintainable codebase.</p>
-                  <p className="text-3xl mt-4 text-left px-8">I have experience working with various programming languages and frameworks, always aiming to deliver high-quality software that meets the needs of users and stakeholders.</p>
-                  <p className="text-3xl mt-4 text-left px-8">Gaming and Motorsport are some of my greatest passions. 3D modeling, 3D printing and building models are also hobbies I enjoy in my free time.</p>
+                  <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-6">Hello! My name is Mateo Suarez</h1>
+                  <p className="sm:text-xl lg:text-2xl text-left px-8">I&apos;m a passionate software developer with a love to create innovative and beautiful solutions. My goal is always learn new things along the way and enjoy the process, always looking for opportunities to grow as a developer. Front-end development is my passion, and I strive to create user-friendly and visually appealing interfaces with modern technologies, great interactivity and applying the best practices for clean and maintainable codebase.</p>
+                  <p className="sm:text-xl lg:text-2xl mt-4 text-left px-8">I have experience working with various programming languages and frameworks, always aiming to deliver high-quality software that meets the needs of users and stakeholders.</p>
+                  <p className="sm:text-xl lg:text-2xl mt-4 text-left px-8">Gaming and Motorsport are some of my greatest passions. 3D modeling, 3D printing and building models are also hobbies I enjoy in my free time.</p>
                 </div>
             </div>
 
             <div className="bg-zinc-400/60 rounded-sm flex flex-col items-center gap-4 mt-20 shadow-lg">
                 <h2 className="text-3xl font-bold bg-linear-to-r from-amber-900/70 to-transparent w-full text-white text-left p-2 rounded-t-sm">Tecnologies I use</h2>
-                <div className="w-full flex flex-wrap justify-center items-stretch gap-6 mb-8 px-4">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center gap-6 mb-8 px-10">
                   <TechCarrousel title="Languages" items={languageItems} />
                   <TechCarrousel title="Frameworks" items={frameworkItems} />
                   <TechCarrousel title="DBMS" items={dbmsItems} />

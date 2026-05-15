@@ -7,6 +7,7 @@ import Loading from "./loading";
 
 export default function Home() {
     const [loading, setLoading] = React.useState(true);
+    const actualYear = new Date().getFullYear();
     
     React.useEffect(() => {
         const timer = setTimeout(() => {
@@ -42,7 +43,7 @@ export default function Home() {
             </div>
         </div>
 
-        <p className="absolute bottom-0 right-0 font-mono backdrop-blur-sm p-2 text-white rounded-tl-lg px-3 text-center">2026 - Mateo Suarez</p>
+        <p className="absolute bottom-0 right-0 font-mono backdrop-blur-sm p-2 text-white rounded-tl-lg px-3 text-center">{actualYear} - Mateo Suarez</p>
     </div>
     );
 }

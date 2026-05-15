@@ -40,7 +40,7 @@ export default function TechCarrousel({
         {title}
       </h3>
 
-      <div className="mt-4 h-48 overflow-hidden relative flex flex-col items-center justify-center gap-3">
+      <div className="lg:mt-4 h-48 overflow-hidden relative flex flex-col items-center justify-center gap-3">
         <div
           className={`flex flex-col items-center justify-center gap-3 transition-all duration-300 ease-in-out ${
             animating ? "opacity-0 -translate-y-4" : "opacity-100 translate-y-0"
