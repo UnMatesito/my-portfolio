@@ -45,8 +45,8 @@
         "title": "Alkil.ar",
         "description": "Alkil.ar is a web application destined to facilitate the rental and management of construction machinery. The objective of the application consists in centralizing the actions made by the rental company and the clients, providing a modern and easy-to-use interface for all users. Administrators can manage the inventory of machinery, manage the reservations, handle all the related to users and view statistics. Clients can search for machinery, make reservations, and write their questions and problems in a dedicated forum. Workers of the rental company can also make reservations for machinery, complete delivery forms of machinery that has to be handed to the client and check and notify through the applicaction the state of the machinery once is returned. The application is built using Laravel and MariaDB for database, the inflastructure of the application was built using Docker making sure that every dependency is propoerly handled and encapsulated, as for the front-end it was developed using Blade Templates and components from flowbite and Tailwind CSS for styling.",
         "model": "/models/excavator.glb",
-        "modelScale": [0.04, 0.025, 0.03],
-        "position": [5, 0, 5],
+        "modelScale": [1.4, 1.4, 1.5],
+        "position": [5, 0, 4.7],
         "rotation": [0.0, 0.4, 0],
         "images": [
             "/projects/alkilar_2.png",
@@ -194,7 +194,7 @@
         "description": "Sistema de Observaciones y Recomendaciones de Auditoría (S.O.R.A) is a web application designed to centralize the process of managing audit, observations and recommendations. It provides a platform for editors and consultants to manage the audit process, get automatic statistics of the processes being audited, also for admins and configurators to create users, manage roles and permissions, see historic system logs, and create new tags and sectors for the audited processes. With features such as user authentication, role-based access control, and a user-friendly and modern interface, S.O.R.A aims to enhance the efficiency and effectiveness of audit management. The application is built using Symfony for the backend and Administration page, React for the Audits portal, MySQL for the database, and Docker for containerization with a fully build infrastructure for development and production environments.",
         "model": "/models/audit.glb",
         "modelScale": [1.3, 1.3, 1.3],
-        "position": [-7, 0.2, -0.3],
+        "position": [-7, 0.2, -0.6],
         "rotation": [0.2, 0.4, 0],
         "images": [
             "/projects/sora_1.png",
