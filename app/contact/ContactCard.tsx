@@ -1,17 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ContactCard({image, title, link}: {image: string, title: string, link: string}) {
+export default function ContactCard({
+  image,
+  title,
+  link,
+  compact = false,
+  className = "",
+  onImageLoad,
+}: {
+  image: string;
+  title: string;
+  link: string;
+  compact?: boolean;
+  className?: string;
+  onImageLoad?: () => void;
+}) {
+  const externalTarget = link.startsWith("http") ? "_blank" : undefined;
+
     return (
-        <Link href={link} target="_blank" className="w-full">
-            <div className="bg-black/40 h-45 w-150 rounded-md relative hover:scale-105 transition-transform cursor-pointer shadow-xl">
+        <Link href={link} target={externalTarget} className="w-full">
+            <div className={`relative overflow-hidden rounded-md bg-black/40 shadow-xl transition-transform hover:scale-105 ${compact ? "aspect-[4/3] w-full" : "xl:h-45 xl:w-130 2xl:h-45 2xl:w-150"} ${className}`}>
                 <Image 
                     src={image}
                     alt={title + "_image"}
                     fill
                     className="object-cover rounded-md"
+                    onLoad={onImageLoad}
                 />
-                <h1 className="font-bold text-white drop-shadow-lg text-4xl flex h-full items-end p-4 tracking-wide">{title}</h1>
+                <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
+                <h1 className={`relative flex h-full items-end p-4 font-bold tracking-wide text-white drop-shadow-lg ${compact ? "text-3xl" : "text-4xl"}`}>{title}</h1>
             </div>
         </Link>
     );

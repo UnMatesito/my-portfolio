@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "flowbite-react";
 import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
@@ -22,6 +22,22 @@ export default function Modal({
 }) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isCompactView, setIsCompactView] = useState(false);
+
+  useEffect(() => {
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = documentElement.style.overflow;
+
+    body.style.overflow = "hidden";
+    documentElement.style.overflow = "hidden";
+
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, []);
 
   const placeholderImages = [
     "https://placehold.co/1600x900/6b7280/FFFFFF?text=Placeholder+1",
@@ -31,46 +47,106 @@ export default function Modal({
 
   const displayedImages = [...images.slice(0, 3), ...placeholderImages].slice(0, 3);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1023px)");
+
+    const updateView = () => setIsCompactView(mediaQuery.matches);
+
+    updateView();
+    mediaQuery.addEventListener("change", updateView);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateView);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isCompactView || displayedImages.length <= 1) return;
+
+    const interval = window.setInterval(() => {
+      setActiveImageIndex((current) => (current + 1) % displayedImages.length);
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, [displayedImages.length, isCompactView]);
+
   return (
     <>
-      <div className="fixed inset-0 z-100 flex items-center justify-center animate-appear-from-bottom">
-        <div className="w-full h-full backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-gray-200/40 w-[1000px] max-w-[95vw] h-[620px] max-h-[90vh] rounded-sm shadow-lg flex flex-col">
-            <div className="bg-black rounded-t-sm text-gray-500 font-bold text-center text-2xl py-1 shrink-0">
+      <div className="fixed inset-0 z-100 flex items-center justify-center animate-appear-from-bottom px-3 py-4 sm:px-4">
+        <div className="flex h-full w-full items-center justify-center backdrop-blur-xs">
+          <div className="flex max-h-[92vh] w-full max-w-[1000px] flex-col overflow-hidden rounded-sm bg-gray-200/40 shadow-lg">
+            <div className="shrink-0 rounded-t-sm bg-black py-2 text-center font-bold text-lg text-gray-400 sm:text-2xl">
               <h1>{title}</h1>
             </div>
 
-            <div className="font-light text-lg bg-gray-300/60 mx-2 mt-2 rounded-sm flex flex-row flex-1 min-h-0">
-              <div className="bg-zinc-400/60 w-[340px] max-w-[35%] rounded-l-sm p-2 space-y-2 overflow-y-auto">
-                {displayedImages.map((src, index) => (
+            <div className="mx-2 mt-2 flex min-h-0 flex-1 flex-col rounded-sm bg-gray-300/60 text-lg font-light lg:flex-row">
+              <div className="rounded-t-sm bg-zinc-400/60 p-2 lg:max-w-[35%] lg:rounded-l-sm lg:rounded-tr-none">
+                {isCompactView ? (
                   <button
-                    key={`${src}-${index}`}
                     type="button"
-                    className="block w-full cursor-zoom-in"
+                    className="block w-full cursor-zoom-in overflow-hidden rounded-sm"
                     onClick={() => {
-                      setLightboxIndex(index);
+                      setLightboxIndex(activeImageIndex);
                       setLightboxOpen(true);
                     }}
                   >
                     <Image
-                      src={src}
-                      alt={"Project image " + (index + 1)}
+                      src={displayedImages[activeImageIndex]}
+                      alt={"Project image " + (activeImageIndex + 1)}
                       width={1920}
                       height={1080}
-                      className="rounded-sm object-cover w-full h-40"
+                      className="h-56 w-full rounded-sm object-cover transition-opacity duration-500 sm:h-64 md:h-72"
                     />
                   </button>
-                ))}
+                ) : (
+                  <div className="max-h-56 space-y-2 overflow-y-auto lg:max-h-none lg:w-[340px]">
+                    {displayedImages.map((src, index) => (
+                      <button
+                        key={`${src}-${index}`}
+                        type="button"
+                        className="block w-full cursor-zoom-in"
+                        onClick={() => {
+                          setLightboxIndex(index);
+                          setLightboxOpen(true);
+                        }}
+                      >
+                        <Image
+                          src={src}
+                          alt={"Project image " + (index + 1)}
+                          width={1920}
+                          height={1080}
+                          className="h-36 w-full rounded-sm object-cover sm:h-40"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {isCompactView && displayedImages.length > 1 && (
+                  <div className="mt-2 flex items-center justify-center gap-2 pb-1">
+                    {displayedImages.map((_, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        aria-label={`Show image ${index + 1}`}
+                        onClick={() => setActiveImageIndex(index)}
+                        className={`h-2.5 w-2.5 rounded-full transition-all ${
+                          index === activeImageIndex ? "bg-black scale-110" : "bg-black/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
-              <div className="flex flex-col flex-1 min-h-0">
-                <div className="p-2 w-full flex-1 min-h-0 text-[18px] font-mono overflow-y-auto">
+              <div className="flex min-h-0 flex-1 flex-col">
+                <div className="w-full flex-1 overflow-y-auto p-3 text-sm sm:text-[18px] lg:p-2">
                   <p>{description}</p>
                 </div>
 
-                <div className="p-2 w-full shrink-0 bg-linear-to-r from-zinc-900 to-transparent rounded-br-sm">
-                  <h2 className="font-bold text-lg text-white italic mb-1">Tech Stack:</h2>
-                  <div className="flex flex-row gap-1.5 flex-wrap">
+                <div className="shrink-0 rounded-b-sm bg-linear-to-r from-zinc-900 to-transparent p-3 lg:rounded-br-sm lg:p-2">
+                  <h2 className="mb-2 text-base font-bold italic text-white sm:text-lg">Tech Stack:</h2>
+                  <div className="flex flex-wrap gap-1.5">
                     {techStack.map((tech) => (
                       <TechPill key={tech.id} pillId={tech.id} name={tech.name} logo={tech.icon} />
                     ))}
@@ -79,9 +155,9 @@ export default function Modal({
               </div>
             </div>
 
-            <div className="flex justify-center py-3 items-center shrink-0">
+            <div className="flex shrink-0 items-center justify-center py-3">
               <Button
-                className="font-bold rounded-full text-2xl text-black px-25 h-8 focus:ring-0"
+                className="h-10 rounded-full px-10 text-lg font-bold text-black focus:ring-0 sm:h-8 sm:px-25 sm:text-2xl"
                 color="primary"
                 onClick={onClose}
               >

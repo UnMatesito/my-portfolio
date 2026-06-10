@@ -8,6 +8,7 @@ import TechCarrousel, { TechItem } from "./TechCarrousel";
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
+  const [assetsReady, setAssetsReady] = React.useState(0);
 
   const languageItems: TechItem[] = [
     { name: "JavaScript", iconClass: "devicon-javascript-plain" },
@@ -36,26 +37,26 @@ export default function Home() {
   ];
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 800);
+    if (assetsReady >= 2) {
+      const firstFrame = requestAnimationFrame(() => {
+        const secondFrame = requestAnimationFrame(() => setLoading(false));
+        return () => cancelAnimationFrame(secondFrame);
+      });
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => cancelAnimationFrame(firstFrame);
+    }
 
-  if (loading) {
-    return (
-      <Loading />
-    );
-  }
+    setLoading(true);
+  }, [assetsReady]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center animate-fade-in scroll-smooth">
-        <div className="patterned-background w-screen h-[385%] sm:h-[255%] lg:h-[200%] 2xl:h-[185%] absolute top-0 left-0 -z-10"></div>
+    <div className="relative min-h-screen flex flex-col items-center animate-fade-in scroll-smooth">
+        {loading && <Loading />}
+        <div className="patterned-background w-screen h-[100%] absolute top-0 left-0 -z-10"></div>
         <h1 className="text-4xl font-bold mb-4 bg-linear-to-r from-transparent via-black to-transparent shadow-lg text-white w-screen text-center py-1">About Me</h1>
         <div className="bg-gray-200/40 rounded-sm p-4 max-w-screen text-center text-lg mx-4">
-            <div className="bg-zinc-400/60 rounded-sm p-4 flex flex-col lg:flex-row items-center gap-4 shadow-lg">
-                <Image src="/img/me.jpg" alt="Profile Image" width={600} height={600} className="rounded-sm" unoptimized/>
+            <div className="bg-zinc-400/60 rounded-sm p-4 flex flex-col xl:flex-row items-center gap-4 shadow-lg">
+                <Image src="/img/me.jpg" alt="Profile Image" width={600} height={600} className="rounded-sm" unoptimized onLoad={() => setAssetsReady((count) => count + 1)}/>
                 <div>
                   <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-6">Hello! My name is Mateo Suarez</h1>
                   <p className="sm:text-xl lg:text-2xl text-left px-8">I&apos;m a passionate software developer with a love to create innovative and beautiful solutions. My goal is always learn new things along the way and enjoy the process, always looking for opportunities to grow as a developer. Front-end development is my passion, and I strive to create user-friendly and visually appealing interfaces with modern technologies, great interactivity and applying the best practices for clean and maintainable codebase.</p>
@@ -84,7 +85,7 @@ export default function Home() {
 
         <Link href="/" className="fixed bottom-6 right-6">
           <Image alt="go_back_home" src="/icons/go_back.jpg" width={100} height={0} unoptimized
-          className="shadow-xl rounded-lg hover:scale-110 transition-transform cursor-pointer" />
+          className="shadow-xl rounded-lg hover:scale-110 transition-transform cursor-pointer" onLoad={() => setAssetsReady((count) => count + 1)} />
         </Link> 
     </div>
   );

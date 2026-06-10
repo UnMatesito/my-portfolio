@@ -1,13 +1,11 @@
 "use client";
 
-import { Suspense, useState } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import GraphNode from "./GraphNode";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { ContactShadows, OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import { ContactShadows } from "@react-three/drei";
-import { useGLTF } from "@react-three/drei";
 import DetailsModal from "./DetailsModal";
+import GraphNode from "./GraphNode";
 import details from "./details.json";
 
 type ProjectDetail = {
@@ -15,11 +13,11 @@ type ProjectDetail = {
   title: string;
   description: string;
   model: string;
-  modelScale: [number, number, number];
-  position: [number, number, number];
-  rotation: [number, number, number];
+  modelScale: number[];
+  position: number[];
+  rotation: number[];
   images: string[];
-  tech: { name: string; icon: string }[];
+  tech: { id: string; name: string; icon: string }[];
 };
 
 type Node = {
@@ -32,7 +30,19 @@ type Node = {
   link?: string;
 };
 
+type LabelProjection = {
+  id: string;
+  title: string;
+  left: number;
+  top: number;
+  visible: boolean;
+};
+
 const projectDetails = details as ProjectDetail[];
+const asTriplet = (values: number[]) => values as [number, number, number];
+const GRAPH_FOV = 16;
+
+const GRAPH_CAMERA_DIRECTION = new THREE.Vector3(0, 25, 30).normalize();
 
 const nodes: Node[] = [
   {
@@ -47,10 +57,10 @@ const nodes: Node[] = [
   ...projectDetails.map((project) => ({
     id: project.id,
     title: project.title,
-    position: project.position,
+    position: asTriplet(project.position),
     model: project.model,
-    scale: project.modelScale,
-    rotation: project.rotation,
+    scale: asTriplet(project.modelScale),
+    rotation: asTriplet(project.rotation),
   })),
 ];
 
@@ -58,17 +68,113 @@ Array.from(new Set(nodes.map((node) => node.model))).forEach((modelPath) => {
   useGLTF.preload(modelPath);
 });
 
-const labelPositionById: Record<string, string> = {
-  home: "absolute top-1/2 left-1/2 -translate-x-10 translate-y-8",
-  carrera: "absolute bottom-25 left-[25.5%]",
-  portfolio: "absolute top-[21.5%] left-[34.5%]",
-  audit: "absolute bottom-[42%] left-[16%]",
-  excavator: "absolute bottom-[9%] right-[23%]",
-  building: "absolute right-[17%] top-[33%]",
-};
+const graphBounds = new THREE.Box3().setFromPoints(nodes.map((node) => new THREE.Vector3(...node.position)));
+const graphSize = graphBounds.getSize(new THREE.Vector3());
+const graphCenter = graphBounds.getCenter(new THREE.Vector3());
+const graphTarget: [number, number, number] = [graphCenter.x, 0, graphCenter.z];
+const labelSources = nodes.map(({ id, title }) => ({ id, title }));
 
-export default function ProyectsGraph() {
+function ResponsiveGraphCamera() {
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null);
+  const { size } = useThree();
+
+  const GRAPH_FIT_PADDING = size.width >= 1024 && size.width < 1280 ? 1 : 0;
+
+  const fit = useMemo(() => {
+    if (size.width === 0 || size.height === 0) return null;
+
+    const aspect = size.width / size.height;
+    const verticalFov = THREE.MathUtils.degToRad(GRAPH_FOV);
+    const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * aspect);
+    const widthDistance = (graphSize.x + GRAPH_FIT_PADDING * 2) / (2 * Math.tan(horizontalFov / 2));
+    const depthDistance = (graphSize.z + GRAPH_FIT_PADDING * 2) / (2 * Math.tan(verticalFov / 2));
+    const distance = Math.max(widthDistance, depthDistance, 30) * 1.08;
+    const target = new THREE.Vector3(...graphTarget);
+
+    return {
+      position: target.clone().add(GRAPH_CAMERA_DIRECTION.clone().multiplyScalar(distance)),
+      target,
+      aspect,
+    };
+  }, [size.height, size.width, GRAPH_FIT_PADDING]);
+
+  useEffect(() => {
+    const camera = cameraRef.current;
+    if (!camera || !fit) return;
+
+    camera.fov = GRAPH_FOV;
+    camera.aspect = fit.aspect;
+    camera.near = 0.1;
+    camera.far = 1000;
+    camera.position.copy(fit.position);
+    camera.lookAt(fit.target);
+    camera.updateProjectionMatrix();
+  }, [fit]);
+
+  if (!fit) return null;
+
+  return <PerspectiveCamera ref={cameraRef} makeDefault position={fit.position.toArray() as [number, number, number]} fov={GRAPH_FOV} near={0.1} far={1000} />;
+}
+
+function ProjectedLabelUpdater({
+  anchors,
+  onUpdate,
+}: {
+  anchors: Record<string, [number, number, number]>;
+  onUpdate: (positions: LabelProjection[]) => void;
+}) {
+  const projectedPoint = useRef(new THREE.Vector3());
+  const lastSignature = useRef("");
+
+  useFrame(({ camera, size }) => {
+    const nextPositions = labelSources.map((label) => {
+      const anchor = anchors[label.id];
+
+      if (!anchor) {
+        return { ...label, left: 0, top: 0, visible: false };
+      }
+
+      projectedPoint.current.fromArray(anchor).project(camera);
+      const left = Math.round((projectedPoint.current.x * 0.5 + 0.5) * size.width);
+      const top = Math.round((-projectedPoint.current.y * 0.5 + 0.5) * size.height);
+      const visible = projectedPoint.current.z >= -1 && projectedPoint.current.z <= 1;
+
+      return { ...label, left, top, visible };
+    });
+
+    const signature = nextPositions
+      .map((label) => `${label.id}:${label.left}:${label.top}:${label.visible ? 1 : 0}`)
+      .join("|");
+
+    if (signature !== lastSignature.current) {
+      lastSignature.current = signature;
+      onUpdate(nextPositions);
+    }
+  });
+
+  return null;
+}
+
+export default function ProyectsGraph({ onReady }: { onReady?: (id: string) => void }) {
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
+  const [labelAnchors, setLabelAnchors] = useState<Record<string, [number, number, number]>>({});
+  const [labelPositions, setLabelPositions] = useState<LabelProjection[]>([]);
+
+  const visibleLabels = useMemo(() => labelPositions.filter((label) => label.visible), [labelPositions]);
+
+  const handleAnchorReady = useCallback((id: string, anchor: [number, number, number]) => {
+    setLabelAnchors((current) => {
+      const existing = current[id];
+      if (existing && existing.every((value, index) => Math.abs(value - anchor[index]) < 0.001)) {
+        return current;
+      }
+
+      return {
+        ...current,
+        [id]: anchor,
+      };
+    });
+  }, []);
 
   const openProjectDetails = (projectId: string) => {
     const project = projectDetails.find((item) => item.id === projectId);
@@ -76,9 +182,9 @@ export default function ProyectsGraph() {
       setSelectedProject(project);
     }
   };
-  
+
   return (
-    <div className="w-full h-screen">
+    <div className="relative h-screen w-full overflow-hidden">
       <Canvas
         shadows
         gl={{ antialias: true }}
@@ -86,25 +192,23 @@ export default function ProyectsGraph() {
           gl.shadowMap.enabled = true;
           gl.shadowMap.type = THREE.PCFSoftShadowMap;
         }}
-        camera={{ position: [0, 25, 30], fov: 16, far: 1000, near: 0.1 }}
+        camera={{ position: [0, 25, 30], fov: GRAPH_FOV, far: 1000, near: 0.1 }}
       >
-        <ambientLight intensity={1.25} />
+        <ResponsiveGraphCamera />
 
-        <directionalLight
-          position={[0, 30, 15]}
-        />
+        <ambientLight intensity={1.25} />
+        <directionalLight position={[0, 30, 15]} />
 
         <ContactShadows
           position={[0, 0, 0]}
-          opacity={1.2}        // antes 0.45
-          blur={1}           // antes 2.5
+          opacity={1.2}
+          blur={1}
           scale={25}
           far={30}
           resolution={2048}
-          color="#000000"      // negro puro
+          color="#000000"
         />
 
-        {/* Un solo plano: color transparente + recibe sombra */}
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
           <planeGeometry args={[40, 40]} />
           <meshStandardMaterial
@@ -120,18 +224,35 @@ export default function ProyectsGraph() {
           {nodes.map((node) => (
             <GraphNode
               key={node.id}
+              id={node.id}
               position={node.position}
               model={node.model}
               scale={node.scale}
               rotation={node.rotation}
-              link={node.link || "" }
+              link={node.link || ""}
+              onReady={onReady}
+              onAnchorReady={handleAnchorReady}
               onOpenModal={() => openProjectDetails(node.id)}
             />
           ))}
         </Suspense>
 
-        <OrbitControls enableRotate={false} enablePan={false} enableZoom={false} />
+        <ProjectedLabelUpdater anchors={labelAnchors} onUpdate={setLabelPositions} />
+
+        <OrbitControls target={graphTarget} enableRotate={false} enablePan={false} enableZoom={false} />
       </Canvas>
+
+      <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
+        {visibleLabels.map((label) => (
+          <h1
+            key={label.id}
+            className="absolute max-w-56 -translate-x-1/2 translate-y-3 whitespace-nowrap text-center text-[clamp(1rem,1.2vw+0.55rem,1.875rem)] font-extrabold tracking-normal text-zinc-800 drop-shadow-[0_1px_1px_rgba(255,255,255,0.55)]"
+            style={{ left: label.left, top: label.top }}
+          >
+            {label.title}
+          </h1>
+        ))}
+      </div>
 
       {selectedProject && (
         <DetailsModal
@@ -142,16 +263,6 @@ export default function ProyectsGraph() {
           onClose={() => setSelectedProject(null)}
         />
       )}
-
-      <div className="text-zinc-800 text-3xl font-extrabold">
-        {nodes
-          .filter((node) => labelPositionById[node.id])
-          .map((node) => (
-            <h1 key={node.id} className={labelPositionById[node.id]}>
-              {node.title}
-            </h1>
-          ))}
-      </div>
     </div>
   );
 }

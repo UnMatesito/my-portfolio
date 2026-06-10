@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "flowbite-react/plugin/tailwindcss";
-@import 'devicon/devicon.min.css';
+@import "devicon/devicon.min.css";
 @source "../.flowbite-react/class-list.json";
 
 

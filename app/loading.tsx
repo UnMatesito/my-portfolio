@@ -8,15 +8,19 @@ export default function Loading() {
   const [showSignature, setShowSignature] = useState<boolean | null>(null);
 
   useEffect(() => {
-    setShowSignature(Math.random() > 0.5);
+    const animationFrame = requestAnimationFrame(() => {
+      setShowSignature(Math.random() > 0.5);
+    });
+
+    return () => cancelAnimationFrame(animationFrame);
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black gap-20 absolute top-0 left-0 w-full">
+    <div className="absolute top-0 left-0 z-50 flex min-h-screen w-full flex-col items-center justify-center gap-20 bg-black">
       <div className="font-helvetica text-center flex flex-col items-center">
         <div className="h-32 flex items-center justify-center">
           {showSignature === null ? (
-            <div className="w-100 h-32" />
+            <div className="mb-48 h-32 w-100" aria-hidden="true" />
           ) : showSignature ? (
             <Image
               src="/svg/signature.svg"

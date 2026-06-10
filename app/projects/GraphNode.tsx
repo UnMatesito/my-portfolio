@@ -1,24 +1,40 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { useRouter } from "next/navigation";
 
+type VectorTriplet = [number, number, number];
+
 type GraphNodeProps = {
-  position: [number, number, number];
+  id: string;
+  position: VectorTriplet;
   model: string;
-  scale?: [number, number, number];
-  rotation?: [number, number, number];
+  scale?: VectorTriplet;
+  rotation?: VectorTriplet;
   link: string | "";
   onOpenModal?: () => void;
+  onAnchorReady?: (id: string, anchor: VectorTriplet) => void;
+  onReady?: (id: string) => void;
 };
 
-export default function GraphNode({ position, model, scale, rotation, link, onOpenModal  }: GraphNodeProps) {
+export default function GraphNode({
+  id,
+  position,
+  model,
+  scale,
+  rotation,
+  link,
+  onOpenModal,
+  onAnchorReady,
+  onReady,
+}: GraphNodeProps) {
   const { scene } = useGLTF(model);
   const router = useRouter();
 
   const groupRef = useRef<THREE.Group>(null);
   const isHoveredRef = useRef(false);
+  const readyOnceRef = useRef(false);
 
   const clonedScene = useMemo(() => {
     const clone = scene.clone(true);
@@ -31,6 +47,20 @@ export default function GraphNode({ position, model, scale, rotation, link, onOp
     });
     return clone;
   }, [scene]);
+
+  useEffect(() => {
+    if (readyOnceRef.current) return;
+    readyOnceRef.current = true;
+    onReady?.(id);
+
+    const group = groupRef.current;
+    if (!group) return;
+
+    group.updateWorldMatrix(true, true);
+    const bounds = new THREE.Box3().setFromObject(group);
+    const center = bounds.getCenter(new THREE.Vector3());
+    onAnchorReady?.(id, [center.x, bounds.min.y, center.z]);
+  }, [id, onAnchorReady, onReady]);
 
   const normalizeAngle = (angle: number) => Math.atan2(Math.sin(angle), Math.cos(angle));
 
