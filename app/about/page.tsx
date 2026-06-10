@@ -5,10 +5,12 @@ import Link from "next/link";
 import Loading from "../loading";
 import React from "react";
 import TechCarrousel, { TechItem } from "./TechCarrousel";
+import { useClickSound } from "../components/useClickSound";
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
   const [assetsReady, setAssetsReady] = React.useState(0);
+  const { playThenNavigate } = useClickSound("/sounds/back.mp3");
 
   const languageItems: TechItem[] = [
     { name: "JavaScript", iconClass: "devicon-javascript-plain" },
@@ -83,10 +85,10 @@ export default function Home() {
             </div>
         </div>
 
-        <Link href="/" className="fixed bottom-6 right-6">
+        <Link href="/" className="fixed bottom-6 right-6" onClick={(e) => { e.preventDefault(); playThenNavigate(() => { window.location.href = "/"; }); }}>
           <Image alt="go_back_home" src="/icons/go_back.jpg" width={100} height={0} unoptimized
           className="shadow-xl rounded-lg hover:scale-110 transition-transform cursor-pointer" onLoad={() => setAssetsReady((count) => count + 1)} />
-        </Link> 
+        </Link>
     </div>
   );
 }

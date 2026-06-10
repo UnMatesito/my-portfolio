@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useClickSound } from "./useClickSound";
 
 const modes = [
   { id: 1, title: "About Me", link: "/about" },
@@ -15,6 +16,8 @@ const ITEM_HEIGHT = 58; // Altura de cada elemento en píxeles
 export default function VerticalOptions() {
   const [active, setActive] = useState(0);
   const router = useRouter();
+  const { playThenNavigate } = useClickSound("/sounds/startup.mp3");
+  const { play: playMove } = useClickSound("/sounds/move.mp3");
 
   const clamp = (value: number) =>
     Math.max(0, Math.min(modes.length - 1, value));
@@ -23,12 +26,20 @@ export default function VerticalOptions() {
   const moveDown = () => setActive((prev) => clamp(prev + 1));
 
   const handleWheel = (e: React.WheelEvent) => {
-    if (e.deltaY > 0) moveDown();
-    else moveUp();
+    if (e.deltaY > 0){
+      playMove();
+      moveDown();
+    }
+    else {
+      playMove();
+      moveUp();
+    }
   };
 
   const handleClick = () => {
-    router.push(modes[active].link);
+    playThenNavigate(() => {
+      router.push(modes[active].link);
+    });
   };
 
   return (
@@ -41,6 +52,7 @@ export default function VerticalOptions() {
       <button
         onClick={(e) => {
           e.stopPropagation();
+          playMove();
           moveUp();
         }}
         disabled={active === 0}
@@ -62,6 +74,7 @@ export default function VerticalOptions() {
       <button
         onClick={(e) => {
           e.stopPropagation();
+          playMove();
           moveDown();
         }}
         disabled={active === modes.length - 1}

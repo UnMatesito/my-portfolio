@@ -4,6 +4,7 @@ import Loading from "../loading";
 import ContactCard from "./ContactCard";
 import Link from "next/link";
 import Image from "next/image";
+import { useClickSound } from "../components/useClickSound";
 
 const contacts = [
   { title: "Discord", image: "/icons/discord.webp", link: "https://discord.gg/esMcqQm6" },
@@ -18,6 +19,7 @@ export default function Home() {
   const [assetsReady, setAssetsReady] = React.useState(0);
   const [mounted, setMounted] = React.useState(false);
   const [isDesktop, setIsDesktop] = React.useState(false);
+  const { playThenNavigate } = useClickSound("/sounds/back.mp3");
 
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1280px)");
@@ -53,7 +55,7 @@ export default function Home() {
       {loading && <Loading />}
       <div className="fixed left-0 top-0 z-10 flex w-screen items-center justify-between bg-linear-to-r from-orange-400 to-transparent p-4 shadow-md sm:p-6">
         <h1 className="text-5xl font-light text-white">Contact</h1>
-        <Link href="/">
+        <Link href="/" onClick={(e) => { e.preventDefault(); playThenNavigate(() => { window.location.href = "/"; }); }}>
           <Image alt="go_back_home" src="/icons/go_back.jpg" width={80} height={0} unoptimized
           className="shadow-xl rounded-lg hover:scale-102 transition-transform cursor-pointer" onLoad={() => setAssetsReady((count) => count + 1)} />
         </Link>        

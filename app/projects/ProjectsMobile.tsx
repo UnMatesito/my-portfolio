@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import DetailsModal from "./DetailsModal";
 import details from "./details.json";
+import useSound from "use-sound";
 
 type ProjectDetail = {
   id: string;
@@ -93,6 +94,7 @@ function ProjectCard({
   onOpen: () => void;
   onReady?: () => void;
 }) {
+  const [playSelect] = useSound("/sounds/select.mp3");
   const shortDescription =
     project.description.length > 165
       ? `${project.description.slice(0, 165).replace(/\s+\S*$/, "")}...`
@@ -101,7 +103,7 @@ function ProjectCard({
   return (
     <button
       type="button"
-      onClick={onOpen}
+      onClick={() => { playSelect(); onOpen(); }}
       className="group w-full overflow-hidden rounded-sm border border-black/20 bg-gray-200/40 text-left shadow-lg transition-transform active:scale-[0.99]"
     >
       <div className="border-b border-black/20 bg-black px-4 py-2 sm:px-5">

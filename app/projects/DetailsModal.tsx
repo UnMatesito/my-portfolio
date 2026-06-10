@@ -6,6 +6,7 @@ import Image from "next/image";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import TechPill from "../components/TechPill";
+import { useClickSound } from "../components/useClickSound";
 
 export default function Modal({
   title,
@@ -24,6 +25,7 @@ export default function Modal({
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isCompactView, setIsCompactView] = useState(false);
+  const { play } = useClickSound("/sounds/back.mp3");
 
   useEffect(() => {
     const { body, documentElement } = document;
@@ -159,7 +161,7 @@ export default function Modal({
               <Button
                 className="h-10 rounded-full px-10 text-lg font-bold text-black focus:ring-0 sm:h-8 sm:px-25 sm:text-2xl"
                 color="primary"
-                onClick={onClose}
+                onClick={() => { play(); onClose(); }}
               >
                 Close
               </Button>

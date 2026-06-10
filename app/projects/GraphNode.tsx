@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { useRouter } from "next/navigation";
+import useSound from "use-sound";
 
 type VectorTriplet = [number, number, number];
 
@@ -31,6 +32,7 @@ export default function GraphNode({
 }: GraphNodeProps) {
   const { scene } = useGLTF(model);
   const router = useRouter();
+  const [playSelect] = useSound("/sounds/select.mp3");
 
   const groupRef = useRef<THREE.Group>(null);
   const isHoveredRef = useRef(false);
@@ -89,6 +91,7 @@ export default function GraphNode({
       }}
       onClick={(e) => {
         e.stopPropagation();
+        playSelect();
         if (link !== "") {
           router.push(link);
         } else {
