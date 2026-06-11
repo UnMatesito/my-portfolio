@@ -27,7 +27,7 @@ export default function Loading() {
               alt="Mateo Suarez"
               width={0}
               height={0}
-              className="w-100 invert mb-48"
+              className="w-80 md:w-100 invert mb-48"
               loading="eager"
             />
           ) : (

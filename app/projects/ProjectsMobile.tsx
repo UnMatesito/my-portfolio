@@ -7,6 +7,9 @@ import { useGLTF } from "@react-three/drei";
 import DetailsModal from "./DetailsModal";
 import details from "./details.json";
 import useSound from "use-sound";
+import Link from "next/link";
+import Image from "next/image";
+import { useClickSound } from "../components/useClickSound";
 
 type ProjectDetail = {
   id: string;
@@ -23,10 +26,9 @@ const projectDetails = details as ProjectDetail[];
 const asTriplet = (values: number[]) => values as [number, number, number];
 const MOBILE_MODEL_TARGET_SIZE = 1.8;
 
-const uniqueModels = Array.from(new Set(projectDetails.map((project) => project.model)));
-
-uniqueModels.forEach((modelPath) => {
-  useGLTF.preload(modelPath);
+const uniqueModelUrls = Array.from(new Set(projectDetails.map((p) => p.model)));
+uniqueModelUrls.forEach((url) => {
+  useGLTF.preload(url);
 });
 
 function RotatingModel({
@@ -128,13 +130,13 @@ function ProjectCard({
               <ambientLight intensity={1.65} />
               <directionalLight position={[3, 6, 4]} intensity={2.15} />
               <directionalLight position={[-3, 1, 3]} intensity={0.8} />
-              <Suspense fallback={null}>
-                <RotatingModel
-                  model={project.model}
-                  rotation={project.rotation}
-                  onReady={onReady}
-                />
-              </Suspense>
+                <Suspense fallback={null}>
+                  <RotatingModel
+                    model={project.model}
+                    rotation={project.rotation}
+                    onReady={onReady}
+                  />
+                </Suspense>
             </Canvas>
           </div>
         </div>
@@ -145,6 +147,7 @@ function ProjectCard({
 
 export default function ProjectsMobile({ onReady }: { onReady?: (id: string) => void }) {
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
+  const { playThenNavigate } = useClickSound("/sounds/back.mp3");
 
   return (
     <div className="relative min-h-screen overflow-hidden px-4 pb-8 pt-20 sm:px-6 lg:hidden">
@@ -155,6 +158,11 @@ export default function ProjectsMobile({ onReady }: { onReady?: (id: string) => 
           <p className="text-[10px] uppercase tracking-[0.45em] text-gray-700">Selected works</p>
           <h1 className="mt-1 text-4xl font-bold tracking-tight text-gray-900">My Projects</h1>
         </div>
+
+        <Link href="/" onClick={(e) => { e.preventDefault(); playThenNavigate(() => { window.location.href = "/"; }); }}>
+          <Image alt="go_back_home" src="/icons/go_back.jpg" width={100} height={0} unoptimized
+          className="shadow-xl rounded-lg hover:scale-110 transition-transform cursor-pointer" />
+        </Link>
       </header>
 
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col gap-4 md:gap-5">

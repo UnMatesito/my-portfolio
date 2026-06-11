@@ -36,6 +36,7 @@ export default function ContactCard({
                     src={image}
                     alt={title + "_image"}
                     fill
+                    loading="eager"
                     className="object-cover rounded-md"
                     onLoad={onImageLoad}
                 />

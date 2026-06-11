@@ -188,6 +188,7 @@ export default function ProyectsGraph({ onReady }: { onReady?: (id: string) => v
       <Canvas
         shadows
         gl={{ antialias: true }}
+        dpr={[1, 1.5]}
         onCreated={({ gl }) => {
           gl.shadowMap.enabled = true;
           gl.shadowMap.type = THREE.PCFSoftShadowMap;
