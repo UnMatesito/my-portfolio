@@ -1,0 +1,81 @@
+@import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@import "devicon/devicon.min.css";
+@source "../.flowbite-react/class-list.json";
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme {
+  --font-times: 'Times New Roman', serif;
+
+  --animate-fade-in: fade-in 0.4s ease-in;
+  --animate-appear-from-bottom: appear-from-bottom 0.4s ease-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+.bg-projects {
+  background-image: url('/backgrounds/bg-projects.webp');
+}
+
+.bg-contact {
+  background-image: url('/backgrounds/bg-contact.png');
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-amber {
+  0%, 100% {
+    background-color: oklch(79.149% 0.17036 71.012);
+  }
+  50% {
+    background-color: oklch(98.688% 0.02129 95.306 / 0.5);
+  }
+}
+
+@keyframes appear-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(3000px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-pulse-amber:hover {
+  animation: pulse-amber 0.8s ease-in-out infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.patterned-background {
+  background-color: #7e7e7e;
+  opacity: 0.3;
+  background-image:  repeating-linear-gradient(45deg, #5d5d5d 25%, transparent 25%, transparent 75%, #5d5d5d 75%, #5d5d5d), repeating-linear-gradient(45deg, #5d5d5d 25%, #7e7e7e 25%, #7e7e7e 75%, #5d5d5d 75%, #5d5d5d);
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+}
