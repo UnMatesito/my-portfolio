@@ -63,8 +63,8 @@ export default function Home() {
       <div className="fixed left-0 top-0 z-10 flex w-screen items-center justify-between bg-linear-to-r from-orange-400 to-transparent p-4 shadow-md sm:p-6">
         <h1 className="text-5xl font-light text-white">Contact</h1>
         <Link href="/" onClick={(e) => { e.preventDefault(); playThenNavigate(() => { window.location.href = "/"; }); }}>
-          <Image alt="go_back_home" src="/icons/go_back.jpg" width={80} height={0} unoptimized
-          className="shadow-xl rounded-lg hover:scale-102 transition-transform cursor-pointer" onLoad={() => setAssetsReady((count) => count + 1)} />
+          <Image alt="go_back_home" src="/icons/go_back.jpg" width={0} height={0} unoptimized
+          className="shadow-xl rounded-lg hover:scale-102 transition-transform cursor-pointer w-20 h-auto" onLoad={() => setAssetsReady((count) => count + 1)} />
         </Link>        
       </div>
       <div className="min-h-full w-full">

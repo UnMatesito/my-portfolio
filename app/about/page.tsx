@@ -93,8 +93,8 @@ export default function Home() {
         </div>
 
         <Link href="/" className="fixed bottom-6 right-6" onClick={(e) => { e.preventDefault(); playThenNavigate(() => { window.location.href = "/"; }); }}>
-          <Image alt="go_back_home" src="/icons/go_back.jpg" width={100} height={0} unoptimized
-          className="shadow-xl rounded-lg hover:scale-110 transition-transform cursor-pointer" onLoad={() => setAssetsReady((count) => count + 1)} />
+          <Image alt="go_back_home" src="/icons/go_back.jpg" width={0} height={0} unoptimized
+          className="shadow-xl rounded-lg hover:scale-110 transition-transform cursor-pointer w-20 lg:w-30 h-auto" onLoad={() => setAssetsReady((count) => count + 1)} />
         </Link>
     </div>
   );
