@@ -51,6 +51,13 @@ export default function Home() {
     setLoading(true);
   }, [assetsReady]);
 
+  React.useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = ""; };
+    }
+  }, [loading]);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center animate-fade-in scroll-smooth">
         {loading && <Loading />}

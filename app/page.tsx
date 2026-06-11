@@ -42,6 +42,13 @@ export default function Home() {
         }
     }, [videoReady]);
 
+    React.useEffect(() => {
+        if (loading) {
+            document.body.style.overflow = "hidden";
+            return () => { document.body.style.overflow = ""; };
+        }
+    }, [loading]);
+
     return (
     <div className="relative min-h-screen animate-fade-in">
         {loading && <Loading />}

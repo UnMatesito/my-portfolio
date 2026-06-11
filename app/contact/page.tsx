@@ -50,6 +50,13 @@ export default function Home() {
     setLoading(true);
   }, [assetsReady, mounted]);
 
+  React.useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = ""; };
+    }
+  }, [loading]);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gray-100 bg-contact bg-center bg-cover animate-fade-in">
       {loading && <Loading />}

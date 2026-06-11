@@ -16,7 +16,7 @@ export default function Loading() {
   }, []);
 
   return (
-    <div className="absolute top-0 left-0 z-50 flex min-h-screen w-full flex-col items-center justify-center gap-20 bg-black">
+    <div className="fixed inset-0 z-50 flex min-h-screen w-full flex-col items-center justify-center gap-20 bg-black overscroll-none touch-none">
       <div className="font-helvetica text-center flex flex-col items-center">
         <div className="h-32 flex items-center justify-center">
           {showSignature === null ? (
