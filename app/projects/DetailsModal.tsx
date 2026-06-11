@@ -101,7 +101,7 @@ export default function Modal({
                     />
                   </button>
                 ) : (
-                  <div className="max-h-56 space-y-2 overflow-y-auto lg:max-h-none lg:w-[340px]">
+                  <div className="max-h-56 space-y-2 overflow-y-auto lg:max-h-none lg:w-[330px]">
                     {displayedImages.map((src, index) => (
                       <button
                         key={`${src}-${index}`}

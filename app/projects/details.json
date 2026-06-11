@@ -45,7 +45,7 @@
         "title": "Alkil.ar",
         "description": "Alkil.ar is a web application destined to facilitate the rental and management of construction machinery. The objective of the application consists in centralizing the actions made by the rental company and the clients, providing a modern and easy-to-use interface for all users. Administrators can manage the inventory of machinery, manage the reservations, handle all the related to users and view statistics. Clients can search for machinery, make reservations, and write their questions and problems in a dedicated forum. Workers of the rental company can also make reservations for machinery, complete delivery forms of machinery that has to be handed to the client and check and notify through the applicaction the state of the machinery once is returned. The application is built using Laravel and MariaDB for database, the inflastructure of the application was built using Docker making sure that every dependency is propoerly handled and encapsulated, as for the front-end it was developed using Blade Templates and components from flowbite and Tailwind CSS for styling.",
         "model": "/models/excavator.glb",
-        "modelScale": [1.4, 1.4, 1.5],
+        "modelScale": [1.4, 1.4, 1.6],
         "position": [5, 0, 4.7],
         "rotation": [0.0, 0.4, 0],
         "images": [
