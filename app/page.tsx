@@ -66,7 +66,7 @@ export default function Home() {
         <div className="fixed top-0 left-0 w-full h-full bg-black/10"></div>
         <div className={`min-h-screen flex flex-col items-center justify-center gap-20 transition-opacity duration-300 ${loading ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             <div className="gap-4 flex flex-col items-center justify-center">
-                <Image src="/svg/signature.svg" alt="Mateo Suarez" width={0} height={0} className="mb-4 selection-none w-80 md:w-100 drop-shadow-xl drop-shadow-gray-50" />
+                <Image src="/svg/signature.svg" alt="Mateo Suarez" width={0} height={0} className="mb-4 selection-none w-80 md:w-100 drop-shadow-xl drop-shadow-gray-50" loading="eager"/>
                 <div className="font-bold">
                     <h1 className="italic text-5xl md:text-7xl uppercase drop-shadow-md drop-shadow-gray-50">Mateo Suarez</h1>
                     <h2 className="text-xl md:text-2xl drop-shadow-md drop-shadow-gray-50">The Real Software Developer</h2>
