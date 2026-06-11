@@ -15,8 +15,8 @@ export default function Home() {
   const languageItems: TechItem[] = [
     { name: "JavaScript", iconClass: "devicon-javascript-plain" },
     { name: "TypeScript", iconClass: "devicon-typescript-plain" },
-    { name: "Python", iconClass: "devicon-python-plain" },
     { name: "PHP", iconClass: "devicon-php-plain" },
+    { name: "Python", iconClass: "devicon-python-plain" },
   ];
 
   const frameworkItems: TechItem[] = [
