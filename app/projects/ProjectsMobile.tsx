@@ -24,7 +24,7 @@ type ProjectDetail = {
 
 const projectDetails = details as ProjectDetail[];
 const asTriplet = (values: number[]) => values as [number, number, number];
-const MOBILE_MODEL_TARGET_SIZE = 1.8;
+const MOBILE_MODEL_TARGET_SIZE = 1.7;
 
 const uniqueModelUrls = Array.from(new Set(projectDetails.map((p) => p.model)));
 uniqueModelUrls.forEach((url) => {

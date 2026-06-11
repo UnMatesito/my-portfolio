@@ -63,13 +63,6 @@ export default function Home() {
     };
   }, [isReady, revealedView, viewMode]);
 
-  useEffect(() => {
-    if (!loaded || !mounted) {
-      document.body.style.overflow = "hidden";
-      return () => { document.body.style.overflow = ""; };
-    }
-  }, [loaded, mounted]);
-
   const handleReady = useCallback((mode: ViewMode, id: string) => {
     setReadyByView((current) => {
       if (current[mode].has(id)) return current;
